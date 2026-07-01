@@ -1,5 +1,5 @@
 -- ────────────────────────────────────────────────────────────────────────────
--- BioSoro – Schema Supabase
+-- Schema Supabase
 -- Execute este SQL inteiro no SQL Editor do seu projeto Supabase
 -- ────────────────────────────────────────────────────────────────────────────
 
