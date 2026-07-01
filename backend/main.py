@@ -22,10 +22,10 @@ app.add_middleware(
 
 # ── Clients ──────────────────────────────────────────────────────────────────
 supabase: Client = create_client(
-    os.getenv("SUPABASE_URL"),
-    os.getenv("SUPABASE_SERVICE_KEY"),
+    os.getenv("SUPABASE_URL", ""),
+    os.getenv("SUPABASE_SERVICE_KEY", ""),
 )
-openai_client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+openai_client = OpenAI(api_key=os.getenv("OPENAI_API_KEY", ""))
 security = HTTPBearer()
 
 # ── Conteúdo estático (do docs) ───────────────────────────────────────────────
