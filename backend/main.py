@@ -22,10 +22,10 @@ app.add_middleware(
 
 # ── Clients ──────────────────────────────────────────────────────────────────
 supabase: Client = create_client(
-    os.getenv("SUPABASE_URL", ""),
-    os.getenv("SUPABASE_SERVICE_KEY", ""),
+    os.getenv("SUPABASE_URL"),
+    os.getenv("SUPABASE_SERVICE_KEY"),
 )
-openai_client = OpenAI(api_key=os.getenv("OPENAI_API_KEY", "COLOQUE_AQUI_SUA_CHAVE_OPENAI"))
+openai_client = OpenAI(api_key=os.getenv("OPENAI_API_KEY")
 security = HTTPBearer()
 
 # ── Conteúdo estático (do docs) ───────────────────────────────────────────────
@@ -163,9 +163,15 @@ async def diagnose_text(
 ):
     """Gera descrição da praga via texto (gpt-4o-mini, mais barato que visão)."""
     text_prompt = (
-        f"Você é especialista em pragas agrícolas. Cultura: {culture}. Praga: {pest_name}. "
-        "Descreva em 2 a 3 frases em português como essa praga afeta essa cultura e quais são os principais sintomas ou danos visíveis. "
-        'Responda SOMENTE com JSON válido: {"pest_description":"<descrição aqui>"}'
+        f"Você é especialista em pragas agrícolas. Cultura: {culture}. Praga identificada: {pest_name}. "
+        "Se a praga NÃO é real ou NÃO afeta essa cultura específica, responda apenas: "
+        '{"pest_description":"Praga não identificada ou não afeta esta cultura"}. '
+        "Caso contrário, descreva detalhadamente em 3 a 4 frases em português: "
+        "1) Como a praga se alimenta e causa danos; "
+        "2) Sintomas visíveis nas plantas; "
+        "3) Época do ano mais problemática; "
+        "4) Por que o pH ácido do BioSoro é efetivo contra ela. "
+        'Responda SOMENTE com JSON: {"pest_description":"<descrição completa>"}'
     )
 
     try:
