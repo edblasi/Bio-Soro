@@ -14,7 +14,7 @@ app = FastAPI(title="BioSoro API", version="1.0.0")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[""https://edblasi.github.io""],  # Em produção: substitua pelo URL do GitHub Pages
+    allow_origins=["https://edblasi.github.io"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
