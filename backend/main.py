@@ -163,15 +163,12 @@ async def diagnose_text(
 ):
     """Gera descrição da praga via texto (gpt-4o-mini, mais barato que visão)."""
     text_prompt = (
-        f"Você é especialista em pragas agrícolas. Cultura: {culture}. Praga identificada: {pest_name}. "
-        "Se a praga NÃO é real ou NÃO afeta essa cultura específica, responda apenas: "
-        '{"pest_description":"Praga não identificada ou não afeta esta cultura"}. '
-        "Caso contrário, descreva detalhadamente em 3 a 4 frases em português: "
-        "1) Como a praga se alimenta e causa danos; "
-        "2) Sintomas visíveis nas plantas; "
-        "3) Época do ano mais problemática; "
-        "4) Por que o pH ácido do BioSoro é efetivo contra ela. "
-        'Responda SOMENTE com JSON: {"pest_description":"<descrição completa>"}'
+        f"Você é um identificador de pragas agrícolas EXTREMAMENTE RIGOROSO. "
+        f"Cultura: {culture}. Praga indicada: {pest_name}. "
+        "REGRA ABSOLUTA: Se a praga NÃO existe em bancos de dados agrícolas reais ou NÃO afeta essa cultura, você DEVE responder: "
+        '{"pest_description":"⚠️ Não identificado: essa praga não é conhecida ou não afeta ' + culture + '."} '
+        "APENAS se a praga é 100% real e afeta a cultura, descreva em 2-3 frases: danos, sintomas, época, efetividade do pH ácido. "
+        'Responda SOMENTE JSON: {"pest_description":"<texto>"}'
     )
 
     try:
