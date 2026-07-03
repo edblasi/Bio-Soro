@@ -163,12 +163,37 @@ async def diagnose_text(
 ):
     """Gera descrição da praga via texto (gpt-4o-mini, mais barato que visão)."""
     text_prompt = (
-        f"Você é um identificador de pragas agrícolas EXTREMAMENTE RIGOROSO. "
-        f"Cultura: {culture}. Praga indicada: {pest_name}. "
-        "REGRA ABSOLUTA: Se a praga NÃO existe em bancos de dados agrícolas reais ou NÃO afeta essa cultura, você DEVE responder: "
-        '{"pest_description":"⚠️ Não identificado: essa praga não é conhecida ou não afeta ' + culture + '."} '
-        "APENAS se a praga é 100% real e afeta a cultura, descreva em 2-3 frases: danos, sintomas, época, efetividade do pH ácido. "
-        'Responda SOMENTE JSON: {"pest_description":"<texto>"}'
+        f"""
+        Você é um especialista em fitopatologia.
+
+        Cultura: {culture}
+        Praga: {pest_name}
+
+        Determine se a praga informada é reconhecida e se é conhecida por atacar essa cultura.
+
+        Se reconhecer essa associação com confiança, responda em 2 a 3 frases descrevendo:
+        - danos causados;
+        - sintomas;
+        - época de ocorrência;
+        - influência do pH ácido em seu desenvolvimento.
+
+        Somente responda "Não identificado" se a praga for claramente fictícia, inexistente ou não houver conhecimento confiável de que ataque essa cultura.
+
+        Nesse caso, responda exatamente:
+
+        {{"pest_description":"⚠️ Não identificado: essa praga não é conhecida ou não afeta esta cultura."}}
+
+        Caso contrário, responda exatamente neste formato:
+
+        {{"pest_description":"<descrição>"}}
+
+        IMPORTANTE:
+        - Retorne apenas um JSON válido.
+        - Não utilize markdown.
+        - Não utilize blocos de código.
+        - Não adicione explicações antes ou depois do JSON.
+        - O JSON deve conter apenas a chave "pest_description".
+        """
     )
 
     try:
