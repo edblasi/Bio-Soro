@@ -38,12 +38,7 @@ SCIENTIFIC_EXPLANATION = (
 )
 
 EXTRA_TIPS = {
-    "frequency_guide": [
-        {"level": "Baixa",         "frequency": "1 aplicação a cada 7 dias"},
-        {"level": "Moderada",      "frequency": "1 aplicação a cada 5 dias"},
-        {"level": "Alta",          "frequency": "1 aplicação a cada 2–3 dias até controlar a praga"},
-        {"level": "Após chuva forte", "frequency": "Reaplicar no mesmo dia (preferencialmente no final da tarde)"},
-    ],
+    "frequency_guide": [],
     "timing":     "Recomenda-se fortemente aplicar o produto após as 16h e antes das 10h, quando a intensidade da luz solar é menor.",
     "after_rain": "Em caso de exposição a chuvas fortes, reaplicar o produto.",
 }
