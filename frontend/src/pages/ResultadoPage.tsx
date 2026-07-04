@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useEffect, useState }      from 'react'
 import {
-  Leaf, Droplets, Clock, FlaskConical, Info,
+  Leaf, Droplets, Clock, FlaskConical,
   AlertTriangle, RotateCcw, CheckCircle2, ImageIcon,
 } from 'lucide-react'
 import { Navbar }  from '../components/Navbar'
@@ -22,7 +22,6 @@ export function ResultadoPage() {
 
   const [saved, setSaved] = useState(false)
 
-  /* Redireciona se acessar sem dados */
   useEffect(() => {
     if (!state?.result) navigate('/', { replace: true })
   }, [state, navigate])
@@ -40,7 +39,6 @@ export function ResultadoPage() {
 
       <main className="flex-1 max-w-6xl mx-auto w-full px-6 py-10">
 
-        {/* Cabeçalho */}
         <div className="mb-8 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
           <div>
             <p className="text-xs font-semibold text-[#2D6A4F] uppercase tracking-widest mb-2">Passo 3 de 3 — Protocolo de Tratamento</p>
@@ -71,7 +69,6 @@ export function ResultadoPage() {
           {/* ── COLUNA PRINCIPAL (2/3) ──────────────────────────────────────── */}
           <div className="lg:col-span-2 flex flex-col gap-5">
 
-            {/* Card: Identificação */}
             <div className="bg-white rounded-2xl border border-[#DDE6DF] shadow-sm overflow-hidden">
               <div className="bg-[#1A2E22] px-6 py-4 flex items-center gap-3">
                 <div className="w-9 h-9 rounded-xl bg-[#2D6A4F] flex items-center justify-center flex-shrink-0">
@@ -94,7 +91,6 @@ export function ResultadoPage() {
               </div>
 
               <div className="p-6 flex gap-5">
-                {/* Foto (apenas caminho vision) */}
                 {via === 'vision' && imageUrl && (
                   <div className="flex-shrink-0 w-32 h-32 rounded-xl overflow-hidden border border-[#DDE6DF]">
                     <img src={imageUrl} alt="Plantação analisada" className="w-full h-full object-cover" />
@@ -115,7 +111,6 @@ export function ResultadoPage() {
               </div>
             </div>
 
-            {/* Card: Dosagem e Frequência */}
             <div className="bg-white rounded-2xl border border-[#DDE6DF] shadow-sm p-6">
               <h3 className="text-sm font-semibold text-[#1A2E22] mb-5 flex items-center gap-2">
                 <Droplets size={16} className="text-[#2D6A4F]" /> Protocolo de Aplicação
@@ -141,7 +136,6 @@ export function ResultadoPage() {
               </div>
             </div>
 
-            {/* Card: Explicação Científica */}
             <div className="bg-white rounded-2xl border border-[#DDE6DF] shadow-sm p-6">
               <h3 className="text-sm font-semibold text-[#1A2E22] mb-4 flex items-center gap-2">
                 <FlaskConical size={16} className="text-[#2D6A4F]" /> Por que o BioSoro funciona?
@@ -171,7 +165,7 @@ export function ResultadoPage() {
                 <FlaskConical size={15} className="text-[#2D6A4F]" /> Fórmula do Produto
               </h3>
               <div className="flex flex-col gap-3 text-xs text-[#1A2E22] leading-relaxed">
-    
+
                 <div className="pb-3 border-b border-[#DDE6DF]">
                   <p className="font-semibold text-[#2D6A4F] mb-1.5">1. Obtenção do Soro</p>
                   <p>Adicione o suco de limão ao leite para provocar o coalho e liberar o soro que servirá como base do produto.</p>
@@ -182,13 +176,14 @@ export function ResultadoPage() {
                   <p>Meça as quantidades exatas de 50 mL de soro de leite e 25 mL de gel de babosa, misturando-os bem para garantir a homogeneidade.</p>
                 </div>
 
-              <div>
+                <div>
                   <p className="font-semibold text-[#2D6A4F] mb-1.5">3. Aplicação</p>
                   <p>Coloque a solução em um borrifador manual e aplique de forma controlada sobre as folhas das plantas ou diretamente sobre os insetos-alvo.</p>
                 </div>
 
               </div>
             </div>
+
             {/* Card: Dicas de Aplicação */}
             <div className="bg-[#1A2E22] rounded-2xl p-6 text-white">
               <h3 className="text-sm font-semibold mb-4 flex items-center gap-2">
@@ -208,7 +203,6 @@ export function ResultadoPage() {
               </div>
             </div>
 
-            {/* Botão: nova análise */}
             <button
               onClick={() => navigate('/')}
               className="w-full flex items-center justify-center gap-2 py-3.5 rounded-xl border-2 border-[#B7D5C4] text-[#2D6A4F] font-semibold text-sm hover:bg-[#E8F0EB] transition-all"
