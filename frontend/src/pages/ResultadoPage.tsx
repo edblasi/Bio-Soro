@@ -166,29 +166,29 @@ export function ResultadoPage() {
           <div className="flex flex-col gap-5">
 
             {/* Card: Fórmula do Produto */}
-          <div className="bg-white rounded-2xl border border-[#DDE6DF] shadow-sm p-6">
-            <h3 className="text-sm font-semibold text-[#1A2E22] mb-4 flex items-center gap-2">
-              <FlaskConical size={15} className="text-[#2D6A4F]" /> Fórmula do Produto
-            </h3>
-          <div className="flex flex-col gap-3 text-xs text-[#1A2E22] leading-relaxed">
+            <div className="bg-white rounded-2xl border border-[#DDE6DF] shadow-sm p-6">
+              <h3 className="text-sm font-semibold text-[#1A2E22] mb-4 flex items-center gap-2">
+                <FlaskConical size={15} className="text-[#2D6A4F]" /> Fórmula do Produto
+              </h3>
+              <div className="flex flex-col gap-3 text-xs text-[#1A2E22] leading-relaxed">
     
-        <div className="pb-3 border-b border-[#DDE6DF]">
-          <p className="font-semibold text-[#2D6A4F] mb-1.5">1. Obtenção do Soro</p>
-          <p>Adicione o suco de limão ao leite para provocar o coalho e liberar o soro que servirá como base do produto.</p>
-        </div>
+                <div className="pb-3 border-b border-[#DDE6DF]">
+                  <p className="font-semibold text-[#2D6A4F] mb-1.5">1. Obtenção do Soro</p>
+                  <p>Adicione o suco de limão ao leite para provocar o coalho e liberar o soro que servirá como base do produto.</p>
+                </div>
 
-        <div className="pb-3 border-b border-[#DDE6DF]">
-          <p className="font-semibold text-[#2D6A4F] mb-1.5">2. Mistura</p>
-          <p>Meça as quantidades exatas de 50 mL de soro de leite e 25 mL de gel de babosa, misturando-os bem para garantir a homogeneidade.</p>
-        </div>
+                <div className="pb-3 border-b border-[#DDE6DF]">
+                  <p className="font-semibold text-[#2D6A4F] mb-1.5">2. Mistura</p>
+                  <p>Meça as quantidades exatas de 50 mL de soro de leite e 25 mL de gel de babosa, misturando-os bem para garantir a homogeneidade.</p>
+                </div>
 
-        <div>
-          <p className="font-semibold text-[#2D6A4F] mb-1.5">3. Aplicação</p>
-          <p>Coloque a solução em um borrifador manual e aplique de forma controlada sobre as folhas das plantas ou diretamente sobre os insetos-alvo.</p>
-        </div>
+              <div>
+                  <p className="font-semibold text-[#2D6A4F] mb-1.5">3. Aplicação</p>
+                  <p>Coloque a solução em um borrifador manual e aplique de forma controlada sobre as folhas das plantas ou diretamente sobre os insetos-alvo.</p>
+                </div>
 
-      </div>
-    </div>
+              </div>
+            </div>
             {/* Card: Dicas de Aplicação */}
             <div className="bg-[#1A2E22] rounded-2xl p-6 text-white">
               <h3 className="text-sm font-semibold mb-4 flex items-center gap-2">
