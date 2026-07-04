@@ -165,36 +165,30 @@ export function ResultadoPage() {
           {/* ── COLUNA LATERAL (1/3) ───────────────────────────────────────── */}
           <div className="flex flex-col gap-5">
 
-            {/* Card: Guia de Frequência */}
-            <div className="bg-white rounded-2xl border border-[#DDE6DF] shadow-sm p-6">
-              <h3 className="text-sm font-semibold text-[#1A2E22] mb-4 flex items-center gap-2">
-                <Info size={15} className="text-[#2D6A4F]" /> Guia por Nível de Infestação
-              </h3>
-              <div className="flex flex-col gap-2">
-                {result.extra_tips.frequency_guide.map((item, i) => (
-                  <div
-                    key={i}
-                    className={`rounded-xl px-4 py-3 border text-sm ${
-                      i === 0 ? 'bg-[#E8F0EB] border-[#B7D5C4]' :
-                      i === 1 ? 'bg-[#FFF9EC] border-[#F0D98A]' :
-                      i === 2 ? 'bg-red-50 border-red-100' :
-                                'bg-[#F7FAF8] border-[#DDE6DF]'
-                    }`}
-                  >
-                    <p className={`font-semibold text-xs mb-0.5 ${
-                      i === 0 ? 'text-[#2D6A4F]' :
-                      i === 1 ? 'text-[#7A5C00]' :
-                      i === 2 ? 'text-red-600' :
-                                'text-[#1A2E22]'
-                    }`}>
-                      {item.level}
-                    </p>
-                    <p className="text-[#1A2E22] text-xs leading-relaxed">{item.frequency}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
+            {/* Card: Fórmula do Produto */}
+          <div className="bg-white rounded-2xl border border-[#DDE6DF] shadow-sm p-6">
+            <h3 className="text-sm font-semibold text-[#1A2E22] mb-4 flex items-center gap-2">
+              <FlaskConical size={15} className="text-[#2D6A4F]" /> Fórmula do Produto
+            </h3>
+          <div className="flex flex-col gap-3 text-xs text-[#1A2E22] leading-relaxed">
+    
+        <div className="pb-3 border-b border-[#DDE6DF]">
+          <p className="font-semibold text-[#2D6A4F] mb-1.5">1. Obtenção do Soro</p>
+          <p>Adicione o suco de limão ao leite para provocar o coalho e liberar o soro que servirá como base do produto.</p>
+        </div>
 
+        <div className="pb-3 border-b border-[#DDE6DF]">
+          <p className="font-semibold text-[#2D6A4F] mb-1.5">2. Mistura</p>
+          <p>Meça as quantidades exatas de 50 mL de soro de leite e 25 mL de gel de babosa, misturando-os bem para garantir a homogeneidade.</p>
+        </div>
+
+        <div>
+          <p className="font-semibold text-[#2D6A4F] mb-1.5">3. Aplicação</p>
+          <p>Coloque a solução em um borrifador manual e aplique de forma controlada sobre as folhas das plantas ou diretamente sobre os insetos-alvo.</p>
+        </div>
+
+      </div>
+    </div>
             {/* Card: Dicas de Aplicação */}
             <div className="bg-[#1A2E22] rounded-2xl p-6 text-white">
               <h3 className="text-sm font-semibold mb-4 flex items-center gap-2">
