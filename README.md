@@ -1,133 +1,126 @@
-## PROJETO FEITO 100% COM O CLAUDE CODE PRA UM PROJETO DE BIOLOGIA. NAO ASSUMO AUTORIA
-# 🌱 BioSoro — Defensivos Naturais
+# 🌱 BioSoro — Defensivo Natural com Diagnóstico Inteligente de Pragas
 
-Sistema completo para diagnóstico de pragas agrícolas via IA e protocolo de tratamento com soro de leite.
+Este projeto foi desenvolvido para uma feira de Biologia com fins educacionais e demonstrativos. A proposta foi organizada, adaptada e implementada a partir de pesquisas, referências técnicas e recursos de apoio, portanto não reivindico autoria completa sobre todos os conceitos, ferramentas ou tecnologias utilizados. com o objetivo de apresentar uma solução tecnológica para auxiliar no diagnóstico de pragas agrícolas e na recomendação de protocolos de tratamento utilizando um defensivo natural à base de soro de leite.
 
----
-
-## Arquitetura
-
-```
-React (GitHub Pages)  →  FastAPI (Railway/Render)  →  OpenAI (Vision/Text)
-                                    ↕
-                              Supabase (Auth + DB)
-```
-
-**Dois caminhos de diagnóstico:**
-- **"Não sei a praga"** → foto enviada ao GPT-4o Vision → identifica a praga → busca protocolo no Supabase
-- **"Já sei a praga"** → nome da praga enviado ao GPT-4o-mini → descrição da praga → busca protocolo no Supabase
+O sistema une Inteligência Artificial, banco de dados e uma interface web simples para ajudar o usuário a identificar possíveis pragas em plantas e receber orientações de aplicação do produto.
 
 ---
 
-## 1. Configurar o Supabase
+## 📌 Sobre o Projeto
 
-1. Acesse [supabase.com](https://supabase.com) e abra seu projeto
-2. Vá em **SQL Editor** e execute o arquivo `supabase/schema.sql`
-3. Isso cria as tabelas `cultures` e `search_history`, configura o RLS e insere os dados das 17 culturas
-4. Copie as credenciais em **Project Settings > API**:
-   - `URL` → `SUPABASE_URL` (backend) e `VITE_SUPABASE_URL` (frontend)
-   - `anon public` → `VITE_SUPABASE_ANON_KEY` (frontend)
-   - `service_role` → `SUPABASE_SERVICE_KEY` (backend — nunca expor no frontend!)
+O **BioSoro** é uma plataforma web que permite ao usuário diagnosticar pragas agrícolas de duas formas:
 
----
+1. **Diagnóstico por imagem**
+   O usuário envia uma foto da planta ou da praga, e a Inteligência Artificial analisa a imagem para identificar o possível problema.
 
-## 2. Configurar e rodar o Backend
+2. **Diagnóstico por nome da praga**
+   Caso o usuário já saiba qual é a praga, ele pode informar o nome diretamente e receber o protocolo de tratamento correspondente.
 
-```bash
-cd backend
-
-# Instalar dependências
-pip install -r requirements.txt
-
-# Configurar variáveis de ambiente
-cp .env.example .env
-# Edite o .env com suas chaves
-
-# Rodar localmente
-uvicorn main:app --reload --port 8000
-```
-
-**Variáveis do `.env`:**
-```
-SUPABASE_URL=https://XXXXXXXX.supabase.co
-SUPABASE_SERVICE_KEY=eyJ...   # service_role key
-OPENAI_API_KEY=sk-...
-```
-
-A API estará disponível em `http://localhost:8000`. Documentação automática em `http://localhost:8000/docs`.
+Após o diagnóstico, o sistema consulta o banco de dados e retorna um protocolo com informações sobre a cultura, a praga, a dosagem recomendada e a frequência de aplicação do defensivo natural.
 
 ---
 
-## 3. Configurar e rodar o Frontend
+## 🧪 Objetivo
 
-```bash
-cd frontend
+O objetivo do projeto é demonstrar como a tecnologia pode ser usada na agricultura para:
 
-# Instalar dependências
-npm install
+* auxiliar na identificação de pragas;
+* reduzir o uso excessivo de produtos químicos;
+* incentivar alternativas naturais de controle;
+* facilitar o acesso a informações sobre manejo agrícola;
+* apoiar pequenos produtores e hortas caseiras.
 
-# Configurar variáveis de ambiente
-cp .env.example .env
-# Edite o .env com suas chaves
+---
 
-# Rodar localmente
-npm run dev
-```
+## 🏗️ Arquitetura do Sistema
 
-**Variáveis do `.env`:**
-```
-VITE_SUPABASE_URL=https://XXXXXXXX.supabase.co
-VITE_SUPABASE_ANON_KEY=eyJ...   # anon/public key
-VITE_API_URL=http://localhost:8000
+```txt
+React, hospedado no GitHub Pages
+        ↓
+FastAPI, hospedado no Railway
+        ↓
+OpenAI, para análise por imagem e texto
+        ↓
+Supabase, para autenticação e banco de dados
 ```
 
 ---
 
-## 4. Deploy
+## 🔄 Funcionamento
 
-### Backend → Railway
+O sistema possui dois fluxos principais.
 
-1. Crie conta em [railway.app](https://railway.app)
-2. **New Project > Deploy from GitHub Repo** → selecione o repositório
-3. Configure o **Root Directory** como `backend`
-4. Em **Variables**, adicione as 3 variáveis de ambiente
-5. Railway detecta automaticamente o `requirements.txt` e faz o deploy
-6. Copie a URL gerada (ex: `https://biosoro-backend.up.railway.app`)
+### 1. Quando o usuário não sabe qual é a praga
 
-> **Dica:** No `main.py`, troque `allow_origins=["*"]` pelo URL do seu GitHub Pages para maior segurança.
-
-### Frontend → GitHub Pages
-
-1. No `frontend/package.json`, o script `deploy` já está configurado com `gh-pages`
-2. Crie o `.env` de produção com `VITE_API_URL` apontando para o backend no Railway
-3. Execute:
-
-```bash
-cd frontend
-npm run build   # gera a pasta dist/
-npm run deploy  # publica no GitHub Pages (branch gh-pages)
+```txt
+Usuário envia uma foto
+        ↓
+A imagem é analisada pela IA
+        ↓
+A praga provável é identificada
+        ↓
+O sistema busca o protocolo no banco de dados
+        ↓
+O resultado é exibido ao usuário
 ```
 
-4. No repositório GitHub: **Settings > Pages > Source: Deploy from branch `gh-pages`**
+### 2. Quando o usuário já sabe qual é a praga
+
+```txt
+Usuário digita o nome da praga
+        ↓
+A IA interpreta e descreve a praga
+        ↓
+O sistema busca o protocolo no banco de dados
+        ↓
+O resultado é exibido ao usuário
+```
 
 ---
 
-## Estrutura do projeto
+## 💻 Tecnologias Utilizadas
 
-```
+### Frontend
+
+* React
+* TypeScript
+* Vite
+* Supabase Auth
+* GitHub Pages
+
+### Backend
+
+* Python
+* FastAPI
+* OpenAI API
+* Supabase SDK
+
+### Banco de Dados
+
+* Supabase
+* PostgreSQL
+* Row Level Security
+
+---
+
+## 📂 Estrutura do Projeto
+
+```txt
 biosoro-project/
+│
 ├── backend/
-│   ├── main.py              # FastAPI: todas as rotas
+│   ├── main.py
 │   ├── requirements.txt
 │   └── .env.example
+│
 ├── frontend/
 │   ├── src/
-│   │   ├── App.tsx          # Router (HashRouter para GitHub Pages)
+│   │   ├── App.tsx
 │   │   ├── contexts/
 │   │   │   └── AuthContext.tsx
 │   │   ├── lib/
-│   │   │   ├── supabase.ts  # Cliente Supabase
-│   │   │   └── api.ts       # Chamadas ao backend
+│   │   │   ├── supabase.ts
+│   │   │   └── api.ts
 │   │   ├── components/
 │   │   │   ├── Navbar.tsx
 │   │   │   ├── Footer.tsx
@@ -136,39 +129,291 @@ biosoro-project/
 │   │   └── pages/
 │   │       ├── LoginPage.tsx
 │   │       ├── RegisterPage.tsx
-│   │       ├── HomePage.tsx       # Seleção de caminho (passo 1)
-│   │       ├── DiagnosticoPage.tsx # Upload de foto (passo 2 — IA Vision)
-│   │       ├── ProtocoloPage.tsx   # Seleção manual de praga (passo 2 — texto)
-│   │       └── ResultadoPage.tsx   # Resultado completo (passo 3)
+│   │       ├── HomePage.tsx
+│   │       ├── DiagnosticoPage.tsx
+│   │       ├── ProtocoloPage.tsx
+│   │       └── ResultadoPage.tsx
+│   │
 │   └── .env.example
+│
 └── supabase/
-    └── schema.sql           # Tabelas + RLS + seed das 17 culturas
+    └── schema.sql
 ```
 
 ---
 
-## Endpoints da API
+## ⚙️ Configuração do Supabase
 
-| Método | Rota | Auth | Descrição |
-|--------|------|------|-----------|
-| GET | `/` | — | Health check |
-| GET | `/api/cultures` | — | Lista culturas e pragas |
-| POST | `/api/diagnose/vision` | ✅ | Diagnóstico por foto (GPT-4o) |
-| POST | `/api/diagnose/text` | ✅ | Protocolo por nome da praga (GPT-4o-mini) |
-| GET | `/api/history` | ✅ | Histórico do usuário |
+1. Acesse o site do Supabase.
+2. Crie ou abra um projeto.
+3. Vá até a aba **SQL Editor**.
+4. Execute o arquivo:
+
+```txt
+supabase/schema.sql
+```
+
+Esse arquivo cria as tabelas necessárias, configura as políticas de segurança e insere os dados iniciais das culturas e protocolos.
+
+Depois, vá em:
+
+```txt
+Project Settings > API
+```
+
+Copie as seguintes informações:
+
+```txt
+Project URL
+Anon Public Key
+Service Role Key
+```
+
+A chave `service_role` deve ser usada apenas no backend e nunca deve ser exposta no frontend.
 
 ---
 
-## Fluxo de dados
+## 🔑 Variáveis de Ambiente
 
+### Backend
+
+Crie um arquivo `.env` dentro da pasta `backend` com as seguintes variáveis:
+
+```env
+SUPABASE_URL=https://XXXXXXXX.supabase.co
+SUPABASE_SERVICE_KEY=eyJ...
+OPENAI_API_KEY=sk-...
 ```
-Usuário faz login (Supabase Auth)
-    ↓
-Supabase retorna access_token JWT
-    ↓
-Frontend passa token no header: Authorization: Bearer <token>
-    ↓
-Backend valida via supabase.auth.get_user(token)
-    ↓
-Chama OpenAI → busca no Supabase → salva histórico → retorna resultado
+
+### Frontend
+
+Crie um arquivo `.env` dentro da pasta `frontend` com as seguintes variáveis:
+
+```env
+VITE_SUPABASE_URL=https://XXXXXXXX.supabase.co
+VITE_SUPABASE_ANON_KEY=eyJ...
+VITE_API_URL=http://localhost:8000
 ```
+
+---
+
+## ▶️ Como Rodar o Backend Localmente
+
+Entre na pasta do backend:
+
+```bash
+cd backend
+```
+
+Instale as dependências:
+
+```bash
+pip install -r requirements.txt
+```
+
+Crie o arquivo de variáveis de ambiente:
+
+```bash
+cp .env.example .env
+```
+
+Edite o arquivo `.env` com suas chaves.
+
+Depois, execute o servidor:
+
+```bash
+uvicorn main:app --reload --port 8000
+```
+
+A API ficará disponível em:
+
+```txt
+http://localhost:8000
+```
+
+A documentação automática estará em:
+
+```txt
+http://localhost:8000/docs
+```
+
+---
+
+## ▶️ Como Rodar o Frontend Localmente
+
+Entre na pasta do frontend:
+
+```bash
+cd frontend
+```
+
+Instale as dependências:
+
+```bash
+npm install
+```
+
+Crie o arquivo de variáveis de ambiente:
+
+```bash
+cp .env.example .env
+```
+
+Edite o arquivo `.env` com as informações do Supabase e a URL da API.
+
+Depois, rode o projeto:
+
+```bash
+npm run dev
+```
+
+---
+
+## 🌐 Deploy do Backend
+
+O backend pode ser publicado no Railway ou no Render.
+
+### Railway
+
+1. Crie uma conta no Railway.
+2. Clique em **New Project**.
+3. Escolha **Deploy from GitHub Repo**.
+4. Selecione o repositório do projeto.
+5. Configure o diretório raiz como:
+
+```txt
+backend
+```
+
+6. Adicione as variáveis de ambiente:
+
+```env
+SUPABASE_URL
+SUPABASE_SERVICE_KEY
+OPENAI_API_KEY
+```
+
+7. Após o deploy, copie a URL gerada pelo Railway.
+
+Exemplo:
+
+```txt
+https://biosoro-backend.up.railway.app
+```
+
+---
+
+## 🌐 Deploy do Frontend
+
+O frontend pode ser publicado no GitHub Pages.
+
+Antes do deploy, configure o `.env` de produção com a URL do backend:
+
+```env
+VITE_API_URL=https://biosoro-backend.up.railway.app
+```
+
+Depois, execute:
+
+```bash
+cd frontend
+npm run build
+npm run deploy
+```
+
+No GitHub, vá em:
+
+```txt
+Settings > Pages
+```
+
+E configure a publicação pela branch:
+
+```txt
+gh-pages
+```
+
+---
+
+## 📡 Endpoints da API
+
+| Método | Rota                   | Autenticação | Descrição                                 |
+| ------ | ---------------------- | ------------ | ----------------------------------------- |
+| GET    | `/`                    | Não          | Verifica se a API está funcionando        |
+| GET    | `/api/cultures`        | Não          | Lista as culturas e pragas cadastradas    |
+| POST   | `/api/diagnose/vision` | Sim          | Faz diagnóstico por imagem usando IA      |
+| POST   | `/api/diagnose/text`   | Sim          | Busca protocolo a partir do nome da praga |
+| GET    | `/api/history`         | Sim          | Retorna o histórico do usuário            |
+
+---
+
+## 🔐 Fluxo de Autenticação
+
+```txt
+Usuário faz login
+        ↓
+Supabase Auth gera um token JWT
+        ↓
+Frontend envia o token no header da requisição
+        ↓
+Backend valida o token
+        ↓
+Sistema processa o diagnóstico
+        ↓
+Resultado é salvo no histórico do usuário
+```
+
+O token é enviado no seguinte formato:
+
+```txt
+Authorization: Bearer <token>
+```
+
+---
+
+## 🗃️ Banco de Dados
+
+O banco de dados armazena informações como:
+
+* culturas cadastradas;
+* pragas associadas;
+* protocolos de aplicação;
+* usuários autenticados;
+* histórico de buscas e diagnósticos.
+
+---
+
+## 🔒 Segurança
+
+O projeto utiliza algumas práticas básicas de segurança:
+
+* autenticação com Supabase Auth;
+* validação de token JWT no backend;
+* Row Level Security no banco de dados;
+* chave `service_role` usada apenas no backend;
+* chave pública `anon` usada apenas no frontend;
+* histórico vinculado ao usuário autenticado.
+
+---
+
+## 🌱 Possíveis Melhorias Futuras
+
+Algumas melhorias que podem ser implementadas futuramente:
+
+* painel administrativo para cadastrar novas culturas e pragas;
+* histórico com filtros por data, cultura ou praga;
+* exportação do resultado em PDF;
+* upload de múltiplas imagens;
+* geolocalização das ocorrências;
+* dashboard com estatísticas;
+* treinamento de um modelo próprio de visão computacional;
+* recomendações diferentes conforme o estágio da planta;
+* alertas sobre reaplicação do produto.
+
+---
+
+## ⚠️ Observação
+
+Este projeto foi desenvolvido para fins educacionais e de demonstração em uma feira de Biologia. As recomendações apresentadas pelo sistema devem ser interpretadas como uma proposta experimental e não substituem a orientação de profissionais da área agrícola ou agronômica.
+
+Antes de qualquer aplicação real em larga escala, é necessário realizar testes, validações práticas e análises de segurança para as plantas, para o solo e para o ambiente.
